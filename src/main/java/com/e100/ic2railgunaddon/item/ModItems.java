@@ -30,6 +30,9 @@ public class ModItems {
 	public static final RegistryObject<Item> PENETRATOR = ITEMS.register("penetrator", 
 			() -> new Item(new Item.Properties().tab(ModCreativeModeTab.IC2CRAILGUNADDON_TAB)));
 	
+	public static final RegistryObject<Item> RAILGUNROUND = ITEMS.register("railgunround", 
+			() -> new Item(new Item.Properties().tab(ModCreativeModeTab.IC2CRAILGUNADDON_TAB)));
+	
 	
 	public static void register(IEventBus eventBus) {
 		ITEMS.register(eventBus);
