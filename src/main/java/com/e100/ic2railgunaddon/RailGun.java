@@ -1,5 +1,6 @@
 package com.e100.ic2railgunaddon;
 
+import com.e100.ic2railgunaddon.item.ModItems;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.BlockItem;
@@ -41,6 +42,7 @@ public class RailGun
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        ModItems.register(modEventBus);
         
         modEventBus.addListener(this::commonSetup);        
 
