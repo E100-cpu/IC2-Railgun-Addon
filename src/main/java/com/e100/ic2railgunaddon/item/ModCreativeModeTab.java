@@ -7,7 +7,7 @@ public class ModCreativeModeTab {
 	public static final CreativeModeTab IC2CRAILGUNADDON_TAB = new CreativeModeTab("ic2crailgunaddontab") {
 		@Override
 		public ItemStack makeIcon() {
-			return new ItemStack(ModItems.BARREL.get());
+			return new ItemStack(ModItems.RAILGUN.get());
 		}
 	};
 

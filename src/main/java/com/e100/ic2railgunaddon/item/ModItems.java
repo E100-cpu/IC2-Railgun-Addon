@@ -1,6 +1,7 @@
 package com.e100.ic2railgunaddon.item;
 
 import com.e100.ic2railgunaddon.RailGun;
+import com.e100.ic2railgunaddon.item.custom.RailGunItem;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -32,6 +33,9 @@ public class ModItems {
 	
 	public static final RegistryObject<Item> RAILGUNROUND = ITEMS.register("railgunround", 
 			() -> new Item(new Item.Properties().tab(ModCreativeModeTab.IC2CRAILGUNADDON_TAB)));
+	
+	public static final RegistryObject<Item> RAILGUN = ITEMS.register("railgun", 
+            () -> new RailGunItem(new Item.Properties().tab(ModCreativeModeTab.IC2CRAILGUNADDON_TAB)));
 	
 	
 	public static void register(IEventBus eventBus) {
