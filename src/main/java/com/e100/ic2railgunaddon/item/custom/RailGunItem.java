@@ -1,5 +1,7 @@
 package com.e100.ic2railgunaddon.item.custom;
 
+import org.antlr.v4.runtime.misc.NotNull;
+
 import com.e100.ic2railgunaddon.item.AmmoManager;
 import com.e100.ic2railgunaddon.item.ModCreativeModeTab;
 
@@ -41,6 +43,7 @@ import net.minecraft.world.phys.EntityHitResult;
 
 public class RailGunItem extends CrossbowItem implements IDamagelessElectricItem, IAdvancedTooltip, IElectricEnchantable {
 	private final int ENERGY_PER_USAGE = 10000;
+	private boolean isLoaded = false;
 	
 	public RailGunItem(Properties p_41383_) {
 		super(p_41383_.setNoRepair().stacksTo(1));
@@ -138,15 +141,18 @@ public class RailGunItem extends CrossbowItem implements IDamagelessElectricItem
         return 10.0F;
     }
 	
-	public boolean shouldShowChargeBar(ItemStack stack) {
-        return !StackUtil.getNbtData(stack).getBoolean("hide_charge_bar");
+	@Override
+    public boolean isBarVisible(@NotNull ItemStack stack) {
+        return ElectricItem.MANAGER.getCharge(stack) > 0;
     }
 
-    public int getRGBDurability(ItemStack stack) {
+	@Override
+    public int getBarColor(@NotNull ItemStack stack) {
         return IC2ElectricItem.getRGBDurability(stack);
     }
 
-    public int getElectricWidth(ItemStack stack) {
+	@Override
+    public int getBarWidth(@NotNull ItemStack stack) {
         return IC2ElectricItem.getElectricWidth(stack);
     }
 
