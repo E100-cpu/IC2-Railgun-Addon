@@ -35,7 +35,7 @@ public class ModItems {
 			() -> new Item(new Item.Properties().tab(ModCreativeModeTab.IC2CRAILGUNADDON_TAB)));
 	
 	public static final RegistryObject<Item> RAILGUN = ITEMS.register("railgun", 
-            () -> new RailGunItem(new Item.Properties().tab(ModCreativeModeTab.IC2CRAILGUNADDON_TAB)));
+            () -> new RailGunItem());
 	
 	
 	public static void register(IEventBus eventBus) {
