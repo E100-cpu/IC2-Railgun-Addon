@@ -68,11 +68,6 @@ public class RailGunItem extends IC2ElectricItem implements IDamagelessElectricI
         this.tier = 2;
         this.transferLimit = 512;
     }
-	
-	/*@Override
-	public UseAnim getUseAnimation(ItemStack stack) {
-		return UseAnim.BOW;
-	}*/
 
 	@Override
 	public InteractionResult getEnchantmentCompatibility(ItemStack arg0, Enchantment arg1) {
@@ -175,7 +170,7 @@ public class RailGunItem extends IC2ElectricItem implements IDamagelessElectricI
     
     @Override
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-        return slotChanged || !ItemStack.isSame(oldStack, newStack);
+        return super.shouldCauseReequipAnimation(oldStack, newStack, slotChanged);
     }
     
     private float getDamage() {
