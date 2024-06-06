@@ -15,6 +15,7 @@ import ic2.core.item.base.IC2ElectricItem;
 import ic2.core.platform.rendering.IC2Textures;
 import ic2.core.platform.rendering.features.item.ICustomItemModelTransform;
 import ic2.core.platform.rendering.features.item.IItemModel;
+import ic2.core.platform.rendering.features.item.IToolModel;
 import ic2.core.utils.helpers.StackUtil;
 import ic2.core.utils.plugins.IRegistryProvider;
 import ic2.core.utils.tooltips.IAdvancedTooltip;
@@ -60,7 +61,7 @@ import net.minecraftforge.common.extensions.IForgeItem;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 
-public class RailGunItem extends IC2ElectricItem implements IDamagelessElectricItem, IAdvancedTooltip, IElectricEnchantable, IForgeItem {
+public class RailGunItem extends IC2ElectricItem implements IDamagelessElectricItem, IAdvancedTooltip, IElectricEnchantable {
 	
 	public RailGunItem() {
         super("combat_laser");
@@ -121,7 +122,7 @@ public class RailGunItem extends IC2ElectricItem implements IDamagelessElectricI
     
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand){
 		ItemStack itemstack = pPlayer.getItemInHand(pHand);
-		
+		if (!pLevel.isClientSide() && pHand == InteractionHand.MAIN_HAND) {
 		
 		if (ElectricItem.MANAGER.getCharge(itemstack) > 1000) {
 		   EntityHitResult result = rayTraceEntities(pLevel, (LivingEntity)pPlayer, false, 60.0D);//detects if entity was hit
@@ -135,6 +136,7 @@ public class RailGunItem extends IC2ElectricItem implements IDamagelessElectricI
                ElectricItem.MANAGER.discharge(itemstack, 1000, getTier(itemstack), true, false, false);
                pPlayer.getCooldowns().addCooldown(this, 20); 
                IC2.AUDIO.playSound(pPlayer, IC2Sounds.LASER_DEFAULT, AudioManager.SoundType.ITEM);
+               //pPlayer.swing(pHand, true);
                
 		   }else if(result1.getType() == HitResult.Type.BLOCK){//checks if a block was hit
 			   BlockHitResult blockHitResult = (BlockHitResult) result1;
@@ -145,12 +147,16 @@ public class RailGunItem extends IC2ElectricItem implements IDamagelessElectricI
                    pPlayer.getCooldowns().addCooldown(this, 20);
                    IC2.AUDIO.playSound(pPlayer, IC2Sounds.LASER_DEFAULT, AudioManager.SoundType.ITEM);
                    pPlayer.sendSystemMessage(Component.literal("Fire Placed"));//remember these are for testing
+                   //pPlayer.swing(pHand, true);
+                   
                    
                }else {
                    pPlayer.sendSystemMessage(Component.literal("Target block is not air"));//remember these are for testing
                    ElectricItem.MANAGER.discharge(itemstack, 1000, getTier(itemstack), true, false, false);
                    IC2.AUDIO.playSound(pPlayer, IC2Sounds.LASER_DEFAULT, AudioManager.SoundType.ITEM);
                    pPlayer.getCooldowns().addCooldown(this, 20);
+                   //pPlayer.swing(pHand, true);
+                   
                }
 			   			   			   
 		   }else {
@@ -158,6 +164,7 @@ public class RailGunItem extends IC2ElectricItem implements IDamagelessElectricI
 			   ElectricItem.MANAGER.discharge(itemstack, 1000, getTier(itemstack), true, false, false);
                IC2.AUDIO.playSound(pPlayer, IC2Sounds.LASER_DEFAULT, AudioManager.SoundType.ITEM);
 			   pPlayer.getCooldowns().addCooldown(this, 20); 
+			   //pPlayer.swing(pHand, true);
 		   }
 		   
 		}else {
@@ -165,6 +172,8 @@ public class RailGunItem extends IC2ElectricItem implements IDamagelessElectricI
             pPlayer.getCooldowns().addCooldown(this, 20);
         }
 		
+		}
+	
 	return super.use(pLevel, pPlayer, pHand);    
     }
     
@@ -172,6 +181,12 @@ public class RailGunItem extends IC2ElectricItem implements IDamagelessElectricI
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
         return super.shouldCauseReequipAnimation(oldStack, newStack, slotChanged);
     }
+    
+    /*@Override
+    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+        return true; 
+    }*/      //worked but broke first person model. but third person animation played 
+       
     
     private float getDamage() {
         return 10.0F;
