@@ -89,17 +89,17 @@ public class RailGunItem extends IC2ElectricItem implements IDamagelessElectricI
 	}
 	
 	@Override
-    public boolean isBarVisible(@NotNull ItemStack stack) {
+    public boolean isBarVisible(ItemStack stack) {
         return ElectricItem.MANAGER.getCharge(stack) > 0;
     }
 
 	@Override
-    public int getBarColor(@NotNull ItemStack stack) {
+    public int getBarColor(ItemStack stack) {
         return IC2ElectricItem.getRGBDurability(stack);
     }
 
 	@Override
-    public int getBarWidth(@NotNull ItemStack stack) {
+    public int getBarWidth(ItemStack stack) {
         return IC2ElectricItem.getElectricWidth(stack);
     }
 
@@ -136,7 +136,7 @@ public class RailGunItem extends IC2ElectricItem implements IDamagelessElectricI
                ElectricItem.MANAGER.discharge(itemstack, 1000, getTier(itemstack), true, false, false);
                pPlayer.getCooldowns().addCooldown(this, 20); 
                IC2.AUDIO.playSound(pPlayer, IC2Sounds.LASER_DEFAULT, AudioManager.SoundType.ITEM);
-               //pPlayer.swing(pHand, true);
+               return InteractionResultHolder.success(itemstack);
                
 		   }else if(result1.getType() == HitResult.Type.BLOCK){//checks if a block was hit
 			   BlockHitResult blockHitResult = (BlockHitResult) result1;
@@ -146,16 +146,15 @@ public class RailGunItem extends IC2ElectricItem implements IDamagelessElectricI
                    ElectricItem.MANAGER.discharge(itemstack, 1000, getTier(itemstack), true, false, false);
                    pPlayer.getCooldowns().addCooldown(this, 20);
                    IC2.AUDIO.playSound(pPlayer, IC2Sounds.LASER_DEFAULT, AudioManager.SoundType.ITEM);
-                   pPlayer.sendSystemMessage(Component.literal("Fire Placed"));//remember these are for testing
-                   //pPlayer.swing(pHand, true);
-                   
+                   pPlayer.sendSystemMessage(Component.literal("Fire Placed"));//remember these are for testing                                    
+                   return InteractionResultHolder.success(itemstack);
                    
                }else {
                    pPlayer.sendSystemMessage(Component.literal("Target block is not air"));//remember these are for testing
                    ElectricItem.MANAGER.discharge(itemstack, 1000, getTier(itemstack), true, false, false);
                    IC2.AUDIO.playSound(pPlayer, IC2Sounds.LASER_DEFAULT, AudioManager.SoundType.ITEM);
                    pPlayer.getCooldowns().addCooldown(this, 20);
-                   //pPlayer.swing(pHand, true);
+                   return InteractionResultHolder.success(itemstack);
                    
                }
 			   			   			   
@@ -164,7 +163,7 @@ public class RailGunItem extends IC2ElectricItem implements IDamagelessElectricI
 			   ElectricItem.MANAGER.discharge(itemstack, 1000, getTier(itemstack), true, false, false);
                IC2.AUDIO.playSound(pPlayer, IC2Sounds.LASER_DEFAULT, AudioManager.SoundType.ITEM);
 			   pPlayer.getCooldowns().addCooldown(this, 20); 
-			   //pPlayer.swing(pHand, true);
+			   return InteractionResultHolder.success(itemstack);
 		   }
 		   
 		}else {
@@ -181,17 +180,9 @@ public class RailGunItem extends IC2ElectricItem implements IDamagelessElectricI
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
         return super.shouldCauseReequipAnimation(oldStack, newStack, slotChanged);
     }
-    
-    /*@Override
-    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-        return true; 
-    }*/      //worked but broke first person model. but third person animation played 
-       
-    
+               
     private float getDamage() {
         return 10.0F;
     }
-
-   
 
 }
