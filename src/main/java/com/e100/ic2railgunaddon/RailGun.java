@@ -1,7 +1,10 @@
 package com.e100.ic2railgunaddon;
 
 import com.e100.ic2railgunaddon.item.ModItems;
+import com.e100.ic2railgunaddon.registries.AddonRecipies;
 import com.mojang.logging.LogUtils;
+
+import ic2.core.platform.recipes.misc.AdvRecipeRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -55,7 +58,7 @@ public class RailGun
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-        
+    	AdvRecipeRegistry.INSTANCE.registerListener(AddonRecipies::initRecipes);
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
