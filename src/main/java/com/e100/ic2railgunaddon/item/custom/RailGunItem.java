@@ -141,16 +141,17 @@ public class RailGunItem extends IC2ElectricItem implements IDamagelessElectricI
 		   }else if(result1.getType() == HitResult.Type.BLOCK){//checks if a block was hit
 			   BlockHitResult blockHitResult = (BlockHitResult) result1;
                BlockPos blockPos = blockHitResult.getBlockPos().relative(blockHitResult.getDirection());
+               
                if(pLevel.getBlockState(blockPos).isAir()) {
             	   pLevel.setBlockAndUpdate(blockPos, BaseFireBlock.getState(pLevel, blockPos));
                    ElectricItem.MANAGER.discharge(itemstack, 1000, getTier(itemstack), true, false, false);
                    pPlayer.getCooldowns().addCooldown(this, 20);
                    IC2.AUDIO.playSound(pPlayer, IC2Sounds.LASER_DEFAULT, AudioManager.SoundType.ITEM);
-                   pPlayer.sendSystemMessage(Component.literal("Fire Placed"));//remember these are for testing                                    
+                                                    
                    return InteractionResultHolder.success(itemstack);
                    
                }else {
-                   pPlayer.sendSystemMessage(Component.literal("Target block is not air"));//remember these are for testing
+                   
                    ElectricItem.MANAGER.discharge(itemstack, 1000, getTier(itemstack), true, false, false);
                    IC2.AUDIO.playSound(pPlayer, IC2Sounds.LASER_DEFAULT, AudioManager.SoundType.ITEM);
                    pPlayer.getCooldowns().addCooldown(this, 20);
@@ -159,7 +160,7 @@ public class RailGunItem extends IC2ElectricItem implements IDamagelessElectricI
                }
 			   			   			   
 		   }else {
-			   pPlayer.sendSystemMessage(Component.literal("No target locked"));//remember these are for testing
+			   
 			   ElectricItem.MANAGER.discharge(itemstack, 1000, getTier(itemstack), true, false, false);
                IC2.AUDIO.playSound(pPlayer, IC2Sounds.LASER_DEFAULT, AudioManager.SoundType.ITEM);
 			   pPlayer.getCooldowns().addCooldown(this, 20); 
@@ -167,8 +168,8 @@ public class RailGunItem extends IC2ElectricItem implements IDamagelessElectricI
 		   }
 		   
 		}else {
-            pPlayer.sendSystemMessage(Component.literal("Not enough charge to fire"));//remember these are for testing
-            pPlayer.getCooldowns().addCooldown(this, 20);
+            return InteractionResultHolder.fail(itemstack);
+            
         }
 		
 		}
