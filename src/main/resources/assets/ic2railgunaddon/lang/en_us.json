@@ -2,10 +2,6 @@
 	"item.ic2railgunaddon.core": "Combat Laser Core",
 	"item.ic2railgunaddon.barrel": "Combat Laser Barrel",
 	"item.ic2railgunaddon.stock": "Combat Laser Stock",
-	"item.ic2railgunaddon.mag_rail": "Magnetic Rail",
-	"item.ic2railgunaddon.jacket": "Sabot",
-	"item.ic2railgunaddon.penetrator": "Refined Iron Penetrator",
-	"item.ic2railgunaddon.railgunround": "Railgun Round",
 	"item.ic2railgunaddon.railgun": "Combat Laser",
 	
 	"itemGroup.ic2crailgunaddontab": "IC2 Classic Combat Laser Addon"

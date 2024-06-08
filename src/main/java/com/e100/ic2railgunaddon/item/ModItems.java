@@ -6,7 +6,6 @@ import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 
 public class ModItems {
@@ -20,18 +19,6 @@ public class ModItems {
 			() -> new Item(new Item.Properties().tab(ModCreativeModeTab.IC2CRAILGUNADDON_TAB)));
 	
 	public static final RegistryObject<Item> STOCK = ITEMS.register("stock", 
-			() -> new Item(new Item.Properties().tab(ModCreativeModeTab.IC2CRAILGUNADDON_TAB)));
-	
-	public static final RegistryObject<Item> MAG_RAIL = ITEMS.register("mag_rail", 
-			() -> new Item(new Item.Properties().tab(ModCreativeModeTab.IC2CRAILGUNADDON_TAB)));
-	
-	public static final RegistryObject<Item> JACKET = ITEMS.register("jacket", 
-			() -> new Item(new Item.Properties().tab(ModCreativeModeTab.IC2CRAILGUNADDON_TAB)));
-	
-	public static final RegistryObject<Item> PENETRATOR = ITEMS.register("penetrator", 
-			() -> new Item(new Item.Properties().tab(ModCreativeModeTab.IC2CRAILGUNADDON_TAB)));
-	
-	public static final RegistryObject<Item> RAILGUNROUND = ITEMS.register("railgunround", 
 			() -> new Item(new Item.Properties().tab(ModCreativeModeTab.IC2CRAILGUNADDON_TAB)));
 	
 	public static final RegistryObject<Item> RAILGUN = ITEMS.register("railgun", 
